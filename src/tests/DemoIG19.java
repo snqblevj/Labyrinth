@@ -8,7 +8,7 @@ public class DemoIG19 {
         // Une petite démonstration conernant l'interface graphique
 
 
-        // Saisie des différents paramÃ¨tres
+        // Saisie des différents paramètres
         Object parametres[];
         parametres=IG.saisirParametres(); // On ouvre la fenêtre de paramètrage pour la saisie
 
