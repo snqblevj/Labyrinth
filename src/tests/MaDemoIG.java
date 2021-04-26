@@ -124,7 +124,6 @@ public class MaDemoIG {
             }
             IG.changerPieceHorsPlateau(1,orientationPiece);
             orientationPiece++;
-            System.out.println(orientationPiece);
             IG.miseAJourAffichage();
         }
         IG.attendreClic();
