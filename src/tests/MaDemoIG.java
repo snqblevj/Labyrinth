@@ -97,6 +97,7 @@ public class MaDemoIG {
         int posJ2 = 2;
         int posColJ1 = 0;
         int posColJ2 = 6;
+        int orientationPiece = 1;
         for(int i = 0; i < 4; i++){
             IG.attendreClic();
             if(posJ1 > 2){
@@ -117,6 +118,13 @@ public class MaDemoIG {
             IG.afficherMessage(message);
             IG.enleverObjetPlateau(0,i);
             IG.changerObjetJoueurAvecTransparence(0,i,i);
+
+            if(orientationPiece > 1){
+                orientationPiece = 0;
+            }
+            IG.changerPieceHorsPlateau(1,orientationPiece);
+            orientationPiece++;
+            System.out.println(orientationPiece);
             IG.miseAJourAffichage();
         }
         IG.attendreClic();
