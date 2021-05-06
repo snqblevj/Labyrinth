@@ -8,7 +8,7 @@ package composants;
 public class PieceM0 extends Piece {
 
     /**
-     * A Faire ( 06/05/21 I.LDP Finalisé)
+     * A Faire ( 06/05/21 ILDP Finalisé)
      *
      * Constructeur permettant de construire une piÃ¨ce de modÃ¨le 0 et d'orientation 0.
      */
