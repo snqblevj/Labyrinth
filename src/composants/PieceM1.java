@@ -2,7 +2,7 @@ package composants;
 
 /**
  *
- * Cette classe permet de reprÃ©senter les piÃ¨ces du jeu de modÃ¨le 1.
+ * Cette classe permet de reprÃ©senter les piÃ¨ces du jeu de modÃ¨le 0.
  *
  */
 public class PieceM1 extends Piece {
@@ -10,11 +10,10 @@ public class PieceM1 extends Piece {
     /**
      * A Faire (Quand Qui Statut)
      *
-     * Constructeur permettant de construire une piÃ¨ce de modÃ¨le 1 et d'orientation 0.
+     * Constructeur permettant de construire une piÃ¨ce de modÃ¨le 0 et d'orientation 0.
      */
     public PieceM1() {
-        // A Modifier !!!
-        super(-1,false,false,false,false);
+        super(1,true,false,true,false);
     }
     /**
      * A Faire (Quand Qui Statut)
@@ -23,8 +22,10 @@ public class PieceM1 extends Piece {
      * @return Une copie de la piÃ¨ce.
      */
     public Piece copy(){
-        Piece piece=null;
-        // A ComplÃ©ter
+        Piece piece=new PieceM1();
+        piece.setOrientation(this.getOrientationPiece());
+
+
         return piece;
     }
 }
