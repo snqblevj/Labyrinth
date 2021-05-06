@@ -8,7 +8,7 @@ package composants;
 public class PieceM2 extends Piece {
 
     /**
-     * A Faire (Quand Qui Statut)
+     * A Faire (06/05/2021 GB Finalisée)
      *
      * Constructeur permettant de construire une piÃ¨ce de modÃ¨le 2 et d'orientation 0.
      */
@@ -16,7 +16,7 @@ public class PieceM2 extends Piece {
         super(2,true,true,false,true);
     }
     /**
-     * A Faire (Quand Qui Statut)
+     * A Faire (06/05/2021 GB Finalisée)
      *
      * MÃ©thode permettant de crÃ©er une copie de la piÃ¨ce (un nouvelle objet Java).
      * @return Une copie de la piÃ¨ce.
