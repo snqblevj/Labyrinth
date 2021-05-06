@@ -1,34 +1,42 @@
 package composants;
 
+import org.w3c.dom.ls.LSOutput;
+
+import java.util.Random;
+
 /**
  *
- * Cette classe permet de reprÃ©senter les diffÃ©rentes piÃ¨ces du jeu.
+ * Cette classe permet de représenter les différentes pièces du jeu.
  *
  */
-abstract public class Piece {
+abstract public class Piece{
 
-    private int modelePiece; 		// Le modÃ¨le de la piÃ¨ce
-    private int orientationPiece; 	// L'orientation de la piÃ¨ce
-    private boolean[] pointsEntree; // Les points d'entrÃ©e indice 0 pour le haut, 1 pour la droite, 2 pour le bas et 3 pour la gauche.
+    private int modelePiece; 		// Le modèle de la pièce
+    private int orientationPiece; 	// L'orientation de la pièce
+    private boolean[] pointsEntree; // Les points d'entrée indice 0 pour le haut, 1 pour la droite, 2 pour le bas et 3 pour la gauche.
 
     /**
      * A Faire (Quand Qui Statut)
      *
-     * Constructeur permettant de crÃ©er une piÃ¨ce d'un modÃ¨le avec l'orientation 0.
-     * @param modelePiece Le modÃ¨le de la piÃ¨ce.
-     * @param pointEntreeHaut Un boolÃ©en indiquant si la piÃ¨ce a un point d'entrÃ©e en haut.
-     * @param pointEntreeDroite Un boolÃ©en indiquant si la piÃ¨ce a un point d'entrÃ©e Ã  droite.
-     * @param pointEntreeBas Un boolÃ©en indiquant si la piÃ¨ce a un point d'entrÃ©e en bas.
-     * @param pointEntreeGauche Un boolÃ©en indiquant si la piÃ¨ce a un point d'entrÃ©e Ã  gauche.
+     * Constructeur permettant de créer une pièce d'un modèle avec l'orientation 0.
+     * @param modelePiece Le modèle de la pièce.
+     * @param pointEntreeHaut Un booléen indiquant si la pièce a un point d'entrée en haut.
+     * @param pointEntreeDroite Un booléen indiquant si la pièce a un point d'entrée Ã  droite.
+     * @param pointEntreeBas Un booléen indiquant si la pièce a un point d'entrée en bas.
+     * @param pointEntreeGauche Un booléen indiquant si la pièce a un point d'entrée Ã  gauche.
      */
     public Piece(int modelePiece,boolean pointEntreeHaut,boolean pointEntreeDroite,boolean pointEntreeBas,boolean pointEntreeGauche){
-
-        // A ComplÃ©ter
-
+        this.modelePiece = modelePiece;
+        this.orientationPiece = 0;
+        this.pointsEntree = new boolean[4];
+        this.pointsEntree[0] = pointEntreeHaut;
+        this.pointsEntree[1] = pointEntreeDroite;
+        this.pointsEntree[2] = pointEntreeBas;
+        this.pointsEntree[3] = pointEntreeGauche;
     }
 
     /**
-     * MÃ©thoide retournant un String reprÃ©sentant la piÃ¨ce.
+     * Méthode retournant un String représentant la pièce.
      */
     @Override
     public String toString() {
@@ -38,75 +46,116 @@ abstract public class Piece {
     /**
      * A Faire (Quand Qui Statut)
      *
-     * MÃ©thode permettant de rotationner une piÃ¨ce dans le sens d'une horloge.
+     * Méthode permettant de rotationner une pièce dans le sens d'une horloge.
      */
     public void rotation(){
-
-        // A ComplÃ©ter
-
+        boolean tmp = pointsEntree[0], tmp2;
+        for(int i = 0; i < pointsEntree.length; i++){
+            if(i == 0){
+                pointsEntree[i] = pointsEntree[pointsEntree.length - 1];
+            }
+            else{
+                tmp2 = pointsEntree[i];
+                pointsEntree[i] = tmp;
+                tmp = tmp2;
+            }
+        }
+        orientationPiece++;
+        if(getModelePiece()==1){
+            orientationPiece = orientationPiece % 2;
+        }
+        else{
+            if(orientationPiece>3){
+                orientationPiece = 0;
+            }
+        }
     }
 
     /**
      * A Faire (Quand Qui Statut)
      *
-     * MÃ©thode permettant d'orienter une piÃ¨ce vers une orientation spÃ©cifique.
-     * @param orientationPiece Un entier correspondant Ã  la nouvelle orientation de la piÃ¨ce.
+     * Méthode permettant d'orienter une pièce vers une orientation spécifique.
+     * @param orientationPiece Un entier correspondant à la nouvelle orientation de la pièce.
      */
     public void setOrientation(int orientationPiece){
-        // A ComplÃ©ter
+        if(orientationPiece >= 0 && orientationPiece <= 3){
+            while (this.orientationPiece != orientationPiece){
+                rotation();
+            }
+        }
     }
 
     /**
      * A Faire (Quand Qui Statut)
      *
-     * MÃ©thode retournant le modÃ¨le de la piÃ¨ce.
-     * @return Un entier corrspondant au modÃ¨le de la piÃ¨ce.
+     * Méthode retournant le modèle de la pièce.
+     * @return Un entier corrspondant au modèle de la pièce.
      */
     public int getModelePiece() {
-        // A Modifier !!!
-        return -1;
+        return modelePiece;
     }
 
     /**
      * A Faire (Quand Qui Statut)
      *
-     * MÃ©thode retournant l'orientation de la piÃ¨ce.
-     * @return un entier retournant l'orientation de la piÃ¨ce.
+     * Méthode retournant l'orientation de la pièce.
+     * @return un entier retournant l'orientation de la pièce.
      */
     public int getOrientationPiece() {
-        // A Modifier !!!
-        return -1;
+        return orientationPiece;
     }
 
     /**
      * A Faire (Quand Qui Statut)
      *
-     * MÃ©thode indiquant si il existe un point d'entrÃ©e Ã  une certaine position (0: en haut, 1: Ã  droite, 2: en bas, 3: Ã  gauche).
-     * @param pointEntree L'indice/la position du point d'entrÃ©e.
-     * @return true si il y a un point d'entrÃ©e, sinon false.
+     * Méthode indiquant si il existe un point d'entrée à  une certaine position (0: en haut, 1: à droite, 2: en bas, 3: à  gauche).
+     * @param pointEntree L'indice/la position du point d'entrée.
+     * @return true si il y a un point d'entrée, sinon false.
      */
     public boolean getPointEntree(int pointEntree){
-        // A Modifier !!!
-        return false;
+        return pointsEntree[pointEntree];
     }
 
     /**
      * A Faire (Quand Qui Statut)
      *
-     * MÃ©thode permettant de crÃ©er un tableau contenant toutes les piÃ¨ces du jeu (les 50 piÃ¨ces).
-     * Le tableau contiendra 20 piÃ¨ces du modÃ¨le 0, 12 piÃ¨ces du modÃ¨le 1 et 18 piÃ¨ces du modÃ¨le 2.
-     * L'orientation de chaque piÃ¨ce sera alÃ©atoire.
-     * @return Un tableau contenant toutes les piÃ¨ces du jeu.
+     * Méthode permettant de créer un tableau contenant toutes les pièces du jeu (les 50 pièces).
+     * Le tableau contiendra 20 pièces du modèle 0, 12 pièces du modèle 1 et 18 pièces du modèle 2.
+     * L'orientation de chaque pièce sera aléatoire.
+     * @return Un tableau contenant toutes les pièces du jeu.
      */
     public static Piece[] nouvellesPieces(){
-        Piece pieces[]=null;
-        // A ComplÃ©ter (A Faire aprÃ¨s les classes PieceM0, PieceM1 et PieceM2)
+        Piece pieces[] = new Piece[50];
+        for(int i = 0; i < 20; i++){
+            pieces[i] = new PieceM0();
+            Random rdm = new Random();
+            int alea;
+            alea = rdm.nextInt(4);
+            pieces[i].setOrientation(alea);
+        }
+
+        for(int j = 20; j < 32; j++){
+            pieces[j] = new PieceM1();
+            Random rdm = new Random();
+            int alea;
+            alea = rdm.nextInt(2);
+            pieces[j].setOrientation(alea);
+        }
+
+        for(int k = 32; k < 50; k++){
+            pieces[k] = new PieceM2();
+            Random rdm = new Random();
+            int alea;
+            alea = rdm.nextInt(4);
+            pieces[k].setOrientation(alea);
+        }
+
         return pieces;
     }
 
     /**
-     * MÃ©thode permettant de crÃ©er une copie de la piÃ¨ce (un nouvelle objet Java).
-     * @return Une copie de la piÃ¨ce.
+     * Méthode permettant de créer une copie de la pièce (un nouvelle objet Java).
+     * @return Une copie de la pièce.
      */
     public abstract Piece copy();
 }
