@@ -1,11 +1,15 @@
 package composants;
 
+import org.w3c.dom.ls.LSOutput;
+
+import java.util.Random;
+
 /**
  *
  * Cette classe permet de représenter les différentes pièces du jeu.
  *
  */
-abstract public class Piece {
+abstract public class Piece{
 
     private int modelePiece; 		// Le modèle de la pièce
     private int orientationPiece; 	// L'orientation de la pièce
@@ -22,9 +26,13 @@ abstract public class Piece {
      * @param pointEntreeGauche Un booléen indiquant si la pièce a un point d'entrée Ã  gauche.
      */
     public Piece(int modelePiece,boolean pointEntreeHaut,boolean pointEntreeDroite,boolean pointEntreeBas,boolean pointEntreeGauche){
-
-        // A Compléter
-
+        this.modelePiece = modelePiece;
+        this.orientationPiece = 0;
+        this.pointsEntree = new boolean[4];
+        this.pointsEntree[0] = pointEntreeHaut;
+        this.pointsEntree[1] = pointEntreeDroite;
+        this.pointsEntree[2] = pointEntreeBas;
+        this.pointsEntree[3] = pointEntreeGauche;
     }
 
     /**
@@ -41,9 +49,26 @@ abstract public class Piece {
      * Méthode permettant de rotationner une pièce dans le sens d'une horloge.
      */
     public void rotation(){
-
-        // A Compléter
-
+        boolean tmp = pointsEntree[0], tmp2;
+        for(int i = 0; i < pointsEntree.length; i++){
+            if(i == 0){
+                pointsEntree[i] = pointsEntree[pointsEntree.length - 1];
+            }
+            else{
+                tmp2 = pointsEntree[i];
+                pointsEntree[i] = tmp;
+                tmp = tmp2;
+            }
+        }
+        orientationPiece++;
+        if(getModelePiece()==1){
+            orientationPiece = orientationPiece % 2;
+        }
+        else{
+            if(orientationPiece>3){
+                orientationPiece = 0;
+            }
+        }
     }
 
     /**
@@ -53,7 +78,11 @@ abstract public class Piece {
      * @param orientationPiece Un entier correspondant à la nouvelle orientation de la pièce.
      */
     public void setOrientation(int orientationPiece){
-        // A Compléter
+        if(orientationPiece >= 0 && orientationPiece <= 3){
+            while (this.orientationPiece != orientationPiece){
+                rotation();
+            }
+        }
     }
 
     /**
@@ -63,8 +92,7 @@ abstract public class Piece {
      * @return Un entier corrspondant au modèle de la pièce.
      */
     public int getModelePiece() {
-        // A Modifier !!!
-        return -1;
+        return modelePiece;
     }
 
     /**
@@ -74,8 +102,7 @@ abstract public class Piece {
      * @return un entier retournant l'orientation de la pièce.
      */
     public int getOrientationPiece() {
-        // A Modifier !!!
-        return -1;
+        return orientationPiece;
     }
 
     /**
@@ -86,8 +113,7 @@ abstract public class Piece {
      * @return true si il y a un point d'entrée, sinon false.
      */
     public boolean getPointEntree(int pointEntree){
-        // A Modifier !!!
-        return false;
+        return pointsEntree[pointEntree];
     }
 
     /**
@@ -99,8 +125,31 @@ abstract public class Piece {
      * @return Un tableau contenant toutes les pièces du jeu.
      */
     public static Piece[] nouvellesPieces(){
-        Piece pieces[]=null;
-        // A Compléter (A Faire après les classes PieceM0, PieceM1 et PieceM2)
+        Piece pieces[] = new Piece[50];
+        for(int i = 0; i < 20; i++){
+            pieces[i] = new PieceM0();
+            Random rdm = new Random();
+            int alea;
+            alea = rdm.nextInt(4);
+            pieces[i].setOrientation(alea);
+        }
+
+        for(int j = 20; j < 32; j++){
+            pieces[j] = new PieceM1();
+            Random rdm = new Random();
+            int alea;
+            alea = rdm.nextInt(2);
+            pieces[j].setOrientation(alea);
+        }
+
+        for(int k = 32; k < 50; k++){
+            pieces[k] = new PieceM2();
+            Random rdm = new Random();
+            int alea;
+            alea = rdm.nextInt(4);
+            pieces[k].setOrientation(alea);
+        }
+
         return pieces;
     }
 
