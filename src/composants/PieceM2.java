@@ -13,8 +13,7 @@ public class PieceM2 extends Piece {
      * Constructeur permettant de construire une piÃ¨ce de modÃ¨le 2 et d'orientation 0.
      */
     public PieceM2() {
-        // A Modifier !!!
-        super(-1,false,false,false,false);
+        super(2,true,true,false,true);
     }
     /**
      * A Faire (Quand Qui Statut)
@@ -23,8 +22,9 @@ public class PieceM2 extends Piece {
      * @return Une copie de la piÃ¨ce.
      */
     public Piece copy(){
-        Piece piece=null;
-        // A ComplÃ©ter
+        Piece piece=new PieceM2();
+        piece.setOrientation(this.getOrientationPiece());
+
         return piece;
     }
 }
