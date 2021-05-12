@@ -16,7 +16,7 @@ public class PieceM0 extends Piece {
         super(0,false,true,true,false);
     }
     /**
-     * A Faire (Quand Qui Statut)
+     * A Faire (06/05/21 ILDP Finalisé)
      *
      * MÃ©thode permettant de crÃ©er une copie de la piÃ¨ce (un nouvelle objet Java).
      * @return Une copie de la piÃ¨ce.
