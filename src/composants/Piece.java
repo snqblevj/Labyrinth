@@ -148,7 +148,7 @@ abstract public class Piece{
             alea = rdm.nextInt(4);
             pieces[k].setOrientation(alea);
         }
-
+        
         return pieces;
     }
 
