@@ -2,6 +2,7 @@
   <library name="libIG20">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/librairies/libIG20.jar!/" />
+      <root url="jar://$PROJECT_DIR$/librairies/libIG24.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
