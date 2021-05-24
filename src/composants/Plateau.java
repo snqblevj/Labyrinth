@@ -167,52 +167,17 @@ public class Plateau {
         int resultat[][] = null;
         int caseChemin = 1;
         int chemin[][] = new int[caseChemin][2];
-        chemin[0][0] = posLigCaseDep;
-        chemin[0][1] = posColCaseDep;
+        for(int i = 0; i < 4; i++){
+            if(i == 0){
+                if(passageEntreCases(posLigCaseDep,posColCaseDep,posColCaseDep-1, posColCaseDep)){
+                    chemin[0][0] = posLigCaseDep;
+                    chemin[0][1] = posColCaseDep;
+                    posLigCaseDep = posColCaseDep;
 
-        int xCaseAtm = posLigCaseDep;
-        int yCaseAtm = posColCaseDep;
-        int xNextCase = 0;
-        int yNextCase = 0;
-        int xPreviousCase = -1;
-        int yPreviousCase = -1;
-
-        for(int i = 0; i < 4; i++) {
-            if(plateau[xCaseAtm][yCaseAtm].getPointEntree(i)){
-                if(i == 0){
-                    if(passageEntreCases(xCaseAtm, yCaseAtm, xCaseAtm-1, yCaseAtm)){
-                        xPreviousCase = xCaseAtm;
-                        yPreviousCase = yCaseAtm;
-                        xCaseAtm = xCaseAtm-1;
-                    }
                 }
-                if(i == 1){
-                    if(passageEntreCases(xCaseAtm, yCaseAtm, xCaseAtm, yCaseAtm+1)){
-                        xPreviousCase = xCaseAtm;
-                        yPreviousCase = yCaseAtm;
-                        yCaseAtm = yCaseAtm+1;
-                    }
-                }
-                if(i == 2){
-                    if(passageEntreCases(xCaseAtm, yCaseAtm, xCaseAtm+1, yCaseAtm)){
-                        xPreviousCase = xCaseAtm;
-                        yPreviousCase = yCaseAtm;
-                        xCaseAtm = xCaseAtm+1;
-                    }
-                }
-                if(i == 3){
-                    if(passageEntreCases(xCaseAtm, yCaseAtm, xCaseAtm, yCaseAtm-1)){
-                        xPreviousCase = xCaseAtm;
-                        yPreviousCase = yCaseAtm;
-                        yCaseAtm = yCaseAtm-1;
-                    }
-                }
-                caseChemin++;
-                chemin[caseChemin-1][0] = xCaseAtm;
-                chemin[caseChemin-1][1] = yCaseAtm;
             }
-
         }
+
         return resultat;
     }
 
