@@ -20,7 +20,7 @@ public abstract class Joueur {
     private int posColonne; // La colonne correspondant à la position du joueur sur le plateau
 
     /**
-     * A Faire (Quand Qui Statut)
+     *Finalisé (LT 23/05/21)
      *
      * Constructeur permettant de créer un joueur à partir de son nom, son type et
      * le numÃ©ro de l'image le représentant. La position du joueur sur le plateau doit être
@@ -84,7 +84,7 @@ public abstract class Joueur {
 
     /**
      *
-     * A Faire (Quand Qui Statut)
+     * Finalisé (CT 23/05/21)
      *
      * Méthode retournant le nombre d'objets récupérés par le joueur.
      *
@@ -96,7 +96,7 @@ public abstract class Joueur {
 
 
     /**
-     * A Faire (Quand Qui Statut)
+     * Finalisé (CT 23/05/21)
      *
      * Méthode retournant la ligne du plateau sur laquelle se trouve le joueur.
      * @return  La ligne du plateau sur laquelle se trouve le joueur.
@@ -107,7 +107,7 @@ public abstract class Joueur {
 
 
     /**
-     * A Faire (Quand Qui Statut)
+     *Finalisé (CT 23/05/21)
      *
      * Méthode retournant la colonne du plateau sur laquelle se trouve le joueur.
      * @return La colonne du plateau sur laquelle se trouve le joueur.
@@ -118,7 +118,7 @@ public abstract class Joueur {
 
 
     /**
-     * A Faire (Quand Qui Statut)
+     * Finalisé (BG 23/05/21)
      *
      * Méthode retournant le nom du joueur.
      * @return Le nom du joueur.
@@ -128,7 +128,7 @@ public abstract class Joueur {
     }
 
     /**
-     * A Faire (Quand Qui Statut)
+     * Finalisé (BG 23/05/21)
      *
      * Méthode retournant le numéro de l'image représentant le joueur.
      * @return Le numÃ©ro de l'image représentant le joueur.
@@ -138,7 +138,7 @@ public abstract class Joueur {
     }
 
     /**
-     * A Faire (Quand Qui Statut)
+     *Finalisé (BG 23/05/21)
      *
      * Méthode permettant d'affecter au joueur les objets qu'il devra réupérer durant le jeu.
      * Attention : cette méthode devra créer un nouveau tableau pour l'attribut this.objetsARecuperer.
@@ -150,7 +150,7 @@ public abstract class Joueur {
     }
 
     /**
-     * A Faire (Quand Qui Statut)
+     * Finalisé (CT 16/05/21)
      *
      * Méthode retournant un nouveau tableau contenant les objets attribués au joueur. Des objets à récupérer devront être
      * affectés au joueur avant tout appel de cette méthode (on suppose donc que l'attribut objetsJoueur est non null).
@@ -164,7 +164,7 @@ public abstract class Joueur {
 
 
     /**
-     * A Faire (Quand Qui Statut)
+     * Finalisé (CT 16/05/21)
      *
      * Méthode retournant le prochain objet à récupérer par le joueur.
      * Avant d'appeler cette méthode il est nécessaire de s'assurer qu'il existe encore des objets à récupérer.
@@ -177,7 +177,7 @@ public abstract class Joueur {
 
     /**
      *
-     * A Faire (Quand Qui Statut)
+     * Finalisé (BG 23/05/21)
      *
      * Méthode permettant de récupérer un nouvel objet. Cette méthode incrémente simplement de 1 le nombre d'objets qui ont été récupérés.
      */
@@ -187,7 +187,7 @@ public abstract class Joueur {
 
 
     /**
-     * A Faire (Quand Qui Statut)
+     *Finalisé (CT 23/05/21)
      *
      * Méthode retournant le numéro du joueur.
      *
@@ -199,7 +199,7 @@ public abstract class Joueur {
 
     /**
      *
-     * A Faire (Quand Qui Statut)
+     * Finalisé (CT 23/05/21)
      *
      * Méthode permettant le changement de position du joueur.
      * @param posLigne La ligne de la nouvelle position.
