@@ -71,16 +71,31 @@ public class TestPlateau {
         IG.miseAJourAffichage();
         IG.attendreClic();
 
-        int l = 0;
-        int c = 0;
         int length = 0;
+        int i_max = 0;
+        int j_max = 0;
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
                 if(plateau.calculeChemin(3,3,i,j) != null) {
                     System.out.println("Cases entre  (3,3) et " + i + " " + j + " : " + Arrays.deepToString(plateau.calculeChemin(3, 3, i, j)));
+                    if(plateau.calculeChemin(3, 3, i, j).length > length){
+                        i_max = i;
+                        j_max = j;
+                        length = plateau.calculeChemin(3, 3, i, j).length;
+                    }
                 }
             }
         }
+
+        int[][] placerBilles =  plateau.calculeChemin(3, 3, i_max, j_max);
+        for(int i = 0; i < placerBilles.length;i++){
+            IG.placerBilleSurPlateau(placerBilles[i][0],placerBilles[i][1],1,1,2);
+        }
+
+        IG.miseAJourAffichage();
+
+
+
     }
 }
 
