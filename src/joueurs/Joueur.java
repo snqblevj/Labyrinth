@@ -38,8 +38,7 @@ public abstract class Joueur {
         this.numeroImagePersonnage = numeroImagePersonnage;
         this.posLigne = posLignePlateau;
         this.posColonne = posColonnePlateau;
-        objetsJoueur = null;
-        nombreObjetsRecuperes = 0;
+        this.nombreObjetsRecuperes = 0;
     }
 
     /**

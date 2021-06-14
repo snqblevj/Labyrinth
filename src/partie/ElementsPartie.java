@@ -43,8 +43,8 @@ public class ElementsPartie {
             }
         }
 
-        Objet[] listObj = Objet.nouveauxObjets();
-        for (Objet obj : listObj) {
+        this.objets = Objet.nouveauxObjets();
+        for (Objet obj : objets) {
             IG.placerObjetPlateau(obj.getNumeroObjet(), obj.getPosLignePlateau(), obj.getPosColonnePlateau());
         }
         attribuerObjetsAuxJoueurs();
@@ -153,47 +153,113 @@ public class ElementsPartie {
 
 
     /**
-     * A Faire (Quand Qui Statut)
+     * GB 02/06/21
      * <p>
      * Méthode modifiant les différents éléments de la partie suite �  l'insertion de la pièce libre dans le plateau.
      *
      * @param choixEntree L'entrée choisie pour réaliser l'insertion (un nombre entre 0 et 27).
      */
-    public void insertionPieceLibre(int choixEntree) {
-        if (choixEntree >= 0 && choixEntree < 7) {
-            Piece pieceTemp = plateau.getPiece(6, choixEntree).copy();
-            for (int i = 6; i > 0; i--) {
-                IG.changerPiecePlateau(i, choixEntree, plateau.getPiece(i - 1, choixEntree).getModelePiece(), plateau.getPiece(i - 1, choixEntree).getOrientationPiece());
+    public void insertionPieceLibre(int choixEntree){
+        // Fleche du haut selectionne
+        if (choixEntree<7){
+            Piece save = plateau.getPiece(6, choixEntree);
+            for (int i=6; i>=1; i--){
+                plateau.positionnePiece(plateau.getPiece(i-1, choixEntree), i, choixEntree);
             }
-            IG.changerPiecePlateau(0, choixEntree, pieceLibre.getModelePiece(), pieceLibre.getOrientationPiece());
-            pieceLibre = pieceTemp;
-            IG.changerPieceHorsPlateau(pieceLibre.getModelePiece(),pieceLibre.getOrientationPiece());
-        } else if (choixEntree >= 7 && choixEntree < 14) {
-            Piece pieceTemp = plateau.getPiece(choixEntree % 7, 0).copy();
-            for (int i = 6; i > 0; i--) {
-                IG.changerPiecePlateau(choixEntree % 7, i, plateau.getPiece(choixEntree % 7, i - 1).getModelePiece(), plateau.getPiece(choixEntree % 7, i - 1).getOrientationPiece());
+            plateau.positionnePiece(pieceLibre, 0, choixEntree);
+            pieceLibre= save;
+            // modification de la position des joueurs
+            for (int n =0; n<nombreJoueurs;n++){
+                if (joueurs[n].getPosColonne()==choixEntree && joueurs[n].getPosLigne()==6){
+                    joueurs[n].setPosition(0, joueurs[n].getPosColonne());
+                }else if (joueurs[n].getPosColonne()==choixEntree){
+                    joueurs[n].setPosition(joueurs[n].getPosLigne()+1, choixEntree);
+                }
             }
-            IG.changerPiecePlateau(choixEntree % 7, 6, pieceLibre.getModelePiece(), pieceLibre.getOrientationPiece());
-            pieceLibre = pieceTemp;
-            IG.changerPieceHorsPlateau(pieceLibre.getModelePiece(),pieceLibre.getOrientationPiece());
-        } else if (choixEntree >= 14 && choixEntree < 21) {
-            Piece pieceTemp = plateau.getPiece(6, choixEntree % 14).copy();
-            for (int i = 0; i < 6; i++) {
-                IG.changerPiecePlateau(i, 6 - (choixEntree % 14), plateau.getPiece(i + 1, 6 - (choixEntree % 14)).getModelePiece(), plateau.getPiece(i + 1, 6 - (choixEntree % 14)).getOrientationPiece());
+            // modification de la position des Objets
+            for (int numObjet =0; numObjet<objets.length;numObjet++){
+                if (objets[numObjet].getPosColonnePlateau()==choixEntree && objets[numObjet].getPosLignePlateau()==6){
+                    objets[numObjet].positionneObjet(0, objets[numObjet].getPosColonnePlateau());
+                }else if (objets[numObjet].getPosColonnePlateau()==choixEntree){
+                    objets[numObjet].positionneObjet(objets[numObjet].getPosLignePlateau()+1, choixEntree);
+                }
             }
-            IG.changerPiecePlateau(6, 6 - (choixEntree % 14), pieceLibre.getModelePiece(), pieceLibre.getOrientationPiece());
-            pieceLibre = pieceTemp;
-            IG.changerPieceHorsPlateau(pieceLibre.getModelePiece(),pieceLibre.getOrientationPiece());
-        } else if (choixEntree >= 21 && choixEntree < 28) {
-            Piece pieceTemp = plateau.getPiece(choixEntree % 21, 6).copy();
-            for (int i = 6; i > 0; i--) {
-                IG.changerPiecePlateau(6 - (choixEntree % 21), i, plateau.getPiece(6 - (choixEntree % 21), i - 1).getModelePiece(), plateau.getPiece(6 - (choixEntree % 21), i - 1).getOrientationPiece());
+            // Fleche de droite selectionne
+        }else if(choixEntree<14){
+            Piece save = plateau.getPiece(choixEntree-7, 0);
+            for (int i=0; i<6; i++){
+                plateau.positionnePiece(plateau.getPiece(choixEntree-7, i+1), choixEntree-7,i);
             }
-            IG.changerPiecePlateau(6 - (choixEntree % 21), 0, pieceLibre.getModelePiece(), pieceLibre.getOrientationPiece());
-            pieceLibre = pieceTemp;
-            IG.changerPieceHorsPlateau(pieceLibre.getModelePiece(),pieceLibre.getOrientationPiece());
-        }
+            plateau.positionnePiece(pieceLibre, choixEntree-7, 6);
+            pieceLibre= save;
+            // modification de la position des joueurs
+            for (int n =0; n<nombreJoueurs;n++){
+                if (joueurs[n].getPosLigne()==choixEntree-7 && joueurs[n].getPosColonne()==0){
+                    joueurs[n].setPosition(joueurs[n].getPosLigne(), 6);
+                }else if (joueurs[n].getPosLigne()==choixEntree-7){
+                    joueurs[n].setPosition(choixEntree-7, joueurs[n].getPosColonne()-1);
+                }
+            }
+            // modification de la position des Objets
+            for (int numObjet =0; numObjet<objets.length;numObjet++){
 
+                if (objets[numObjet].getPosLignePlateau()==choixEntree-7 && objets[numObjet].getPosColonnePlateau()==0){
+                    objets[numObjet].positionneObjet(objets[numObjet].getPosLignePlateau(), 6);
+                }else if (objets[numObjet].getPosLignePlateau()==choixEntree-7){
+                    objets[numObjet].positionneObjet(choixEntree-7, objets[numObjet].getPosColonnePlateau()-1);
+                }
+
+            }
+            // Fleche du bas selectionne
+        }else if (choixEntree<21){
+
+            Piece save = plateau.getPiece(0, 20-choixEntree);
+            for (int i=0; i<6; i++){
+                plateau.positionnePiece(plateau.getPiece(i+1, 20-choixEntree), i, 20-choixEntree);
+            }
+            plateau.positionnePiece(pieceLibre, 6, 20-choixEntree);
+            pieceLibre= save;
+            // modification de la position des joueurs
+            for (int n =0; n<nombreJoueurs;n++){
+                if (joueurs[n].getPosColonne()==20-choixEntree && joueurs[n].getPosLigne()==0){
+                    joueurs[n].setPosition(6, 20-choixEntree);
+                }else if (joueurs[n].getPosColonne()==20-choixEntree){
+                    joueurs[n].setPosition(joueurs[n].getPosLigne()-1, 20-choixEntree);
+                }
+            }
+            // modification de la position des Objets
+            for (int numObjet =0; numObjet<objets.length;numObjet++){
+                if (objets[numObjet].getPosColonnePlateau()==20-choixEntree && objets[numObjet].getPosLignePlateau()==0){
+                    objets[numObjet].positionneObjet(6, 20-choixEntree);
+                }else if (objets[numObjet].getPosColonnePlateau()==20-choixEntree){
+                    objets[numObjet].positionneObjet(objets[numObjet].getPosLignePlateau()-1, 20-choixEntree);
+                }
+            }
+            // Fleche de gauche selectionne
+        }else{
+            Piece save = plateau.getPiece(27-choixEntree, 6);
+            for (int i=6; i>=1; i--){
+                plateau.positionnePiece(plateau.getPiece(27-choixEntree, i-1), 27-choixEntree,i );
+            }
+            plateau.positionnePiece(pieceLibre, 27-choixEntree, 0);
+            pieceLibre= save;
+            // modification de la position des joueurs
+            for (int n =0; n<nombreJoueurs;n++){
+                if (joueurs[n].getPosLigne()==27-choixEntree && joueurs[n].getPosColonne()==6){
+                    joueurs[n].setPosition(27-choixEntree, 0);
+                }else if (joueurs[n].getPosLigne()==27-choixEntree){
+                    joueurs[n].setPosition(27-choixEntree, joueurs[n].getPosColonne()+1);
+                }
+            }
+            // modification de la position des Objets
+            for (int numObjet = 0; numObjet<objets.length;numObjet++){
+                if (objets[numObjet].getPosLignePlateau()==27-choixEntree && objets[numObjet].getPosColonnePlateau()==6){
+                    objets[numObjet].positionneObjet(objets[numObjet].getPosLignePlateau(), 0);
+                }else if (objets[numObjet].getPosLignePlateau()==27-choixEntree){
+                    objets[numObjet].positionneObjet(27-choixEntree, objets[numObjet].getPosColonnePlateau()+1);
+                }
+            }
+        }
     }
 
     /**
@@ -212,6 +278,17 @@ public class ElementsPartie {
         Piece nouvellePieceLibre = (this.pieceLibre).copy();
         ElementsPartie nouveauxElements = new ElementsPartie(nouveauxJoueurs, nouveauxObjets, nouveauPlateau, nouvellePieceLibre);
         return nouveauxElements;
+    }
+
+    public Objet objetIci(int ligne, int colonne) {
+        for (int i = 0; i < 18; i++) {
+            if (this.objets[i].getPosLignePlateau() == ligne && this.objets[i].getPosColonnePlateau() == colonne) {
+                if (this.objets[i].surPlateau()) {
+                    return this.objets[i];
+                }
+            }
+        }
+        return null;
     }
 }
 
