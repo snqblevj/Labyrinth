@@ -4,6 +4,7 @@ import composants.Objet;
 import composants.Plateau;
 import composants.Utils;
 import partie.ElementsPartie;
+import partie.Partie;
 
 /**
  *
@@ -43,6 +44,8 @@ public class JoueurOrdinateurT1 extends JoueurOrdinateur {
         while (nouveauJoueur.getNombreObjetsRecuperes()!=this.getNombreObjetsRecuperes())
             nouveauJoueur.recupererObjet();
         return nouveauJoueur;
+
+
     }
 
 }
